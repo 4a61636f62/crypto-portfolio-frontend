@@ -1,23 +1,30 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { login } from '../reducers/userReducer'
 
 // eslint-disable-next-line react/prop-types
-const LoginForm = ({ login }) => {
+const LoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [retry, setRetry] = useState(false)
 
+  const dispatch = useDispatch()
+
   const handleLogin = async (event) => {
     event.preventDefault()
     setPassword('')
-    const successful = await login(username, password)
-    if (!successful) {
+    let success = false
+    dispatch(login(username, password)).then(() => {
+      success = true
+    })
+    if (!success) {
       setRetry(true)
     }
   }
 
   return (
     <form onSubmit={handleLogin}>
-      {retry ? <p>invalid username or password</p> : null}
+       {retry ? <p>invalid username or password</p> : null}
       <div>
         username
         <input

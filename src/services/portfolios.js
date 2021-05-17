@@ -12,13 +12,13 @@ const setAuthToken = (token) => {
   authToken = token
 }
 
-const get = async () => {
+const get = async (id = portfolioId, token = authToken) => {
   const config = {
-    headers: { Authorization: `bearer ${authToken}` }
+    headers: { Authorization: `bearer ${token}` }
   }
 
   try {
-    const response = await axios.get(`${baseUrl}/${portfolioId}`, config)
+    const response = await axios.get(`${baseUrl}/${id}`, config)
     return response.data
   } catch (error) {
     throw new Error(error.response.data.error)
