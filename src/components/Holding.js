@@ -4,10 +4,10 @@ import React from 'react'
 const Holding = ({ coinID, amount, price, currSymbol }) => {
   return (
     <tr data-cy={`holding-${coinID}`}>
-      <td>{coinID}</td>
-      <td>{currSymbol}{price}</td>
-      <td>{amount}</td>
-      <td>{currSymbol}{amount * price}</td>
+      <td data-cy='id'>{coinID}</td>
+      <td data-cy='curr_sym'>{currSymbol}{price}</td>
+      <td data-cy='amount'>{amount}</td>
+      <td data-cy='value'>{currSymbol}{amount * price}</td>
     </tr>
   )
 }

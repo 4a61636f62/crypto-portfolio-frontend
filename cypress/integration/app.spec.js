@@ -64,8 +64,10 @@ describe('Portfolio app', () => {
         .type('1')
       cy.get('[data-cy=add-holding-button]')
         .click()
-      cy.get('[data-cy=holding-bitcoin]')
-        .contains('bitcoin 1')
+      cy.get('[data-cy=holding-bitcoin]').as('holding')
+
+      cy.get('@holding').get('[data-cy=id]').should('contain', 'bitcoin')
+      cy.get('@holding').get('[data-cy=amount').should('contain', '1')
     })
 
     it('existing holdings can be updated', () => {
@@ -75,8 +77,9 @@ describe('Portfolio app', () => {
         .type('1')
       cy.get('[data-cy=add-holding-button]')
         .click()
-      cy.get('[data-cy=holding-bitcoin]')
-        .should('contain', 'bitcoin 1')
+      cy.get('[data-cy=holding-bitcoin]').as('holding')
+
+      cy.get('@holding').get('[data-cy=id]').should('contain', 'bitcoin')
 
       cy.get('[data-cy=coinId-input]')
         .type('bitcoin')
@@ -84,8 +87,10 @@ describe('Portfolio app', () => {
         .type('1')
       cy.get('[data-cy=add-holding-button]')
         .click()
-      cy.get('[data-cy=holding-bitcoin]')
-        .should('contain', 'bitcoin 2')
+      cy.get('[data-cy=holding-bitcoin]').as('holding')
+
+      cy.get('@holding').get('[data-cy=id]').should('contain', 'bitcoin')
+      cy.get('@holding').get('[data-cy=amount').should('contain', '2')
     })
   })
 })
