@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addHolding } from '../reducers/portfolioReducer'
 
 // eslint-disable-next-line react/prop-types
-const HoldingForm = ({ addHolding }) => {
+const HoldingForm = () => {
   const [coinId, setCoinID] = useState('')
   const [amount, setAmount] = useState('')
 
+  const dispatch = useDispatch()
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    addHolding(coinId, amount)
+    dispatch(addHolding(coinId, amount))
     setCoinID('')
     setAmount('')
   }
